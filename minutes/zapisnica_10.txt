@@ -1,0 +1,15 @@
+Datum: 15.12.2016
+Pritomny: Jaroslav Fuska(manazment prace), Martin Heinz(dokumentacia), Michal Puskel(implementacia), Tomas Slama(manazment komunikacie)
+Timove stretnutie: stvrtok 11:30
+
+Zhodnotenie predchadzajuceho tyzdna:
+	- Pridali sme zapisnik.
+    - Stretli sme sa so zadavatelom.
+    - Opravenie mensich chyb v aplikacii.
+
+Ciele na tento tyzden:
+	- dokoncit implementaciu
+    - testovat aplikaciu
+    
+Stretnutie so zadavatelom:
+    Zadavatel nemal ziadne pripomienky, dohodli sme sa, ze aplikacia bude dokoncena do Vianoc.

@@ -1,0 +1,11 @@
+Datum: 14.12.2016
+Pritomny: Jaroslav Fuska(manazment prace), Martin Heinz(dokumentacia), Michal Puskel(implementacia), Tomas Slama(manazment komunikacie)
+Stretnutie s cviciacim(Peter Gergel): streda 13:00
+
+Pripomienky cviciaceho:
+	Ziadne
+
+Na stretnuti s cviciacim sme prediskutovali doterajsi progres:
+	- Pridali sme zapisnik.
+    - Planovane stretnutie so zadavatelom.
+    - Opravenie mensich chyb v aplikacii.
