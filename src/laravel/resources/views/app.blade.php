@@ -58,10 +58,20 @@
 								</li>
 
 							@elseif(Auth::user()->is_admin)
-								<li><a href="{{ url('addtrainers') }}">add Trainers</a></li>
-								<li><a href="{{ url('/rmtrainers') }}">remove Trainers</a></li>
-								<li><a href="{{ url('activate') }}">Activate User</a></li>
-								<li><a href="{{ url('deleteUser') }}">Delete User</a></li>
+								<li class="dropdown"><a href="{{ url('#') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="position: relative;">Trainers  <span class="caret"></span></a>
+									<ul class="dropdown-menu" role="menu">
+										<li><a href="{{ url('addtrainers') }}">add Trainers</a></li>
+										<li><a href="{{ url('/rmtrainers') }}">remove Trainers</a></li>
+									</ul>
+								</li>
+
+								<li class="dropdown"><a href="{{ url('#') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="position: relative;">Users  <span class="caret"></span></a>
+									<ul class="dropdown-menu" role="menu">
+										<li><a href="{{ url('activate') }}">Activate User</a></li>
+										<li><a href="{{ url('deleteUser') }}">Delete User</a></li>
+									</ul>
+								</li>
+
 							@else
 								<li class="dropdown"><a href="{{ url('#') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="position: relative;">Running plans<span class="caret"></span></a>
 									<ul class="dropdown-menu" role="menu">

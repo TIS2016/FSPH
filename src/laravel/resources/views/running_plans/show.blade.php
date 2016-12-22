@@ -123,7 +123,8 @@
                                     </div>
 
                                     {!!  Form::submit('Vymazať plán', [
-                                        "class" => "col-xs-12 js_delete_rp"
+                                        "class" => "col-xs-12 js_delete_rp pull-left btn btn-sm btn-primary",
+                                        "style" => "background-color: red; border-color:red;"
                                     ]) !!}
 
                                 </div>

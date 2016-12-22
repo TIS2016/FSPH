@@ -20,7 +20,7 @@
 					@empty
 						<p>We got nothing, database (table user) is empty!</p>
 					@endforelse
-					{!!  Form::submit('Remove', array('class' => 'pull-left btn btn-sm btn-primary')) !!}
+					{!!  Form::submit('Remove', array('class' => 'pull-left btn btn-sm btn-primary', 'style' => 'background-color:red; border-color:red;')) !!}
 					{!!  Form::close() !!}
 				</div>
 			</div>

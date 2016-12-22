@@ -81,7 +81,8 @@
 
                                 {!!  Form::submit('Uložiť plán', [
                                     'disabled' => 'disabled',
-                                    "class" => "col-xs-12"
+                                    "class" => "pull-left btn btn-sm btn-primary",
+                                    "style" => "width:100%;"//"col-xs-12"
                                 ]) !!}
 
                             </div>

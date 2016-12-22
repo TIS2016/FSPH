@@ -3,13 +3,13 @@ $GMAP_API_KEY = "AIzaSyB3rIhgEx90wqPIo7LzAkloA4YK8GxwJHQ";
 ?>
 
 <input class="col-xs-12 col-sm-8" id="gmap--address" type="textbox" value="vysoke tatry" placeholder="Hľadaj na mape">
-<input class="col-xs-12 col-sm-4" id="gmap--geocode" type="button" value="Hľadaj na mape">
+<input class="col-xs-12 col-sm-4 pull-left btn btn-sm btn-primary" id="gmap--geocode" type="button" value="Hľadaj na mape">
 
 <div id="map"></div>
 
-<input class="col-xs-12 col-sm-4" id="gmap--locate" type="button" value="Lokalizuj aktuálnu polohu">
-<div class="col-xs-12 col-sm-4" id="gmap--distance"></div>
-<input class="col-xs-12 col-sm-4" id="gmap--clear-path" type="button" value="Vymaž trasu">
+<input class="col-xs-12 col-sm-4 pull-left btn btn-sm btn-primary" id="gmap--locate" type="button" value="Lokalizuj aktuálnu polohu" >
+<div class="col-xs-12 col-sm-4 " id="gmap--distance"></div>
+<input class="col-xs-12 col-sm-4 pull-left btn btn-sm btn-primary" style="background-color: red; border-color: red;" id="gmap--clear-path" type="button" value="Vymaž trasu" >
 
 <h2 class="gmap--instructions">Kliknutím ľavým tlačidlom myši pridáte koncový bod trasy.</h2>
 <h2 class="gmap--instructions">Ak sa Vám nedarí vytvárať koncové body trasy, ubezpečte sa prosím, že skutočne iba klikáte a nie ťaháte myš so stlačeným tlačidlom.</h2>
