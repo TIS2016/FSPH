@@ -21,19 +21,13 @@ class GroupController extends Controller {
 
     }
 
-    public function index(){
-        if (Auth::user()->is_trainer != 1){
-            return view("forbidden");
-        }
-
+    public function index()
+    {
         $names = User::all();
         return view("createGroup", compact('names'));
     }
 
     public  function  create(){
-        if (Auth::user()->is_trainer != 1){
-            return view("forbidden");
-        }
 
         $users = collect(Input::get('agree'));
         $groupName = Input::get('groupName');
@@ -58,19 +52,11 @@ class GroupController extends Controller {
     }
 
     public function getToDelete(){
-        if (Auth::user()->is_trainer != 1){
-            return view("forbidden");
-        }
-
         $names = Group::all();
         return view("deleteGroup",compact('names'));
     }
 
     public function delete(){
-        if (Auth::user()->is_trainer != 1){
-            return view("forbidden");
-        }
-
         $groupId = Input::get('agree');
 
         $grp = Group::where('id', $groupId)->first();
@@ -90,9 +76,6 @@ class GroupController extends Controller {
     }
 
     public function getToEdit(){
-        if (Auth::user()->is_trainer != 1){
-            return view("forbidden");
-        }
 
         $trainerId = Auth::user()->id;
         $items = Group::where('trainer_id', $trainerId)->orderBy('name')->lists('name', 'id');
@@ -101,10 +84,6 @@ class GroupController extends Controller {
     }
 
     public function edit(){
-        if (Auth::user()->is_trainer != 1){
-            return view("forbidden");
-        }
-
         $action = Input::get('action', 'none');
         //print($action);
         if($action=='Edit'){
