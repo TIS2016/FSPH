@@ -30,6 +30,11 @@ class DiaryController extends Controller {
 
 	}
 
+	/**
+	 * Upload data to DB and redirect to running_plan
+	 *
+	 * @return running_plan
+	 */
 	public function create(){
 		$userID = Auth::user()->id;
 		(float)$distance = Input::get('distance');
@@ -37,7 +42,26 @@ class DiaryController extends Controller {
 		(int)$mood = Input::get('mood');
 		$userRunningPlanID = 2;
 
-		$userRunPlans = UserRunningPlan::where('user_id', $userID)->orderBy('running_plan_id')->lists('running_plan_id');
+		if (!($distance > 0)){
+			return view('diary')->withErrors('Zle zadaná vzdialenost');
+		}
+		$mytime = \Carbon\Carbon::now();
+		if ($date > $mytime){
+			return view('diary')->withErrors('Nesprávne zadaný dátum');
+		}
+
+		$userRunPlans =  DB::table('user_running_plans')
+								->join('running_plans', 'user_running_plans.running_plan_id', '=', 'running_plans.id')	
+								->select('running_plans.id')	
+								->where('running_plans.end', '>', $mytime)
+								->where('user_id', $userID)
+								->lists('running_plans.id');
+
+		var_dump($userRunPlans);
+		if (empty($userRunPlans)){
+			return view('diary')->withErrors('Nemáš žiadne aktívne bežecké plány');
+		}
+		DB::table('user_running_plans')->where('user_id', $userID)->increment('total_distance', $distance);
 		foreach ($userRunPlans as $urp) {
 			RunningData::create([
 			'user_id' => $userID,
@@ -48,8 +72,7 @@ class DiaryController extends Controller {
 			]);
 		}
 
-		
-		return view('diary');
+		return redirect('running_plan')->with('status', 'Záznam z behu pridaný!');
 	}
 
 }

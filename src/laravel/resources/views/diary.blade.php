@@ -27,13 +27,13 @@
 						{!!  Form::open() !!}
 						{!! Form::label('distanceLabel', 'Zabehnutá vzdialenosť: ') !!}
 						{!! Form::text('distance') !!}
-						{!! Form::label('distanceLabel2', 'km') !!}<br>
+						{!! Form::label('distanceLabel2', 'm') !!}<br>
 						{!! Form::label('dateLabel', 'Dátum behania: ') !!}
 						{!! Form::date('date', \Carbon\Carbon::now()) !!}<br>
 						{!! Form::label('moodLabel', 'Ako sa ti behalo? ') !!}
 						{!! Form::select('mood', array(1 => 'Výborne', 2 => 'Dobre', 3 => 'Nič moc', 4 => 'Zle')) !!}<br>
 						<br>
-						{!!  Form::submit('Zapis', array('class' => 'pull-left btn btn-sm btn-primary')) !!}
+						{!!  Form::submit('Create', array('class' => 'pull-left btn btn-sm btn-primary')) !!}
 						{!!  Form::close() !!}
 					
 				</div>
