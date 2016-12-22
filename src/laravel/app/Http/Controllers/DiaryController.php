@@ -43,16 +43,23 @@ class DiaryController extends Controller {
 		$userRunningPlanID = 2;
 
 		if (!($distance > 0)){
-			return view('diary')->withErrors('Zle zadana vzdialenost');
+			return view('diary')->withErrors('Zle zadaná vzdialenost');
 		}
 		$mytime = \Carbon\Carbon::now();
 		if ($date > $mytime){
-			return view('diary')->withErrors('Nespravne zadany datum');
+			return view('diary')->withErrors('Nesprávne zadaný dátum');
 		}
 
-		$userRunPlans = UserRunningPlan::where('user_id', $userID)->orderBy('running_plan_id')->lists('running_plan_id');
+		$userRunPlans =  DB::table('user_running_plans')
+								->join('running_plans', 'user_running_plans.running_plan_id', '=', 'running_plans.id')	
+								->select('running_plans.id')	
+								->where('running_plans.end', '>', $mytime)
+								->where('user_id', $userID)
+								->lists('running_plans.id');
+
+		var_dump($userRunPlans);
 		if (empty($userRunPlans)){
-			return view('diary')->withErrors('Nemas ziadne aktivne bezecke plany');
+			return view('diary')->withErrors('Nemáš žiadne aktívne bežecké plány');
 		}
 		DB::table('user_running_plans')->where('user_id', $userID)->increment('total_distance', $distance);
 		foreach ($userRunPlans as $urp) {
