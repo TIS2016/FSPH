@@ -134,6 +134,39 @@
   }
 }
 
+.runners {
+  font-size: 16px;
+
+  .rp-box__row--header {
+    font-size: 20px;
+  }
+
+  .runners__header--gold {
+    background-color: #FFBD0F;
+    color: white;
+  }
+
+  .runners__header--standard{
+    background-color: @rp-gray-dark;
+    color: black;
+  }
+
+  .rp-box__row--description {
+    border-bottom: 2px solid @rp-gray;
+  }
+}
+
+.runner__description--text {
+  float: left;
+  margin-bottom: 10px;
+}
+
+.runner__description--img {
+  float: right;
+  width: 55px;
+  height: 55px;
+}
+
 .running-plans__div--detail {
   font-size: 16px;
 
@@ -162,7 +195,7 @@
   }
 
   .rp-box__row--group {
-    background: @rp-gray-dark;
+    background-color: @rp-gray-dark;
   }
 }
 
@@ -229,75 +262,45 @@
 .label--delete {
   font-size: 16px;
   font-weight: normal !important;
+  margin-top: 40px;
 
   &:hover {
     cursor: pointer;
   }
 }
 
+.rp__button--sign-in,
+.rp__button--sign-out {
+  border: none;
+  color: white;
+  font-size: 18px;
+  line-height: 35px;
+  margin-top: 75px;
+}
+
+.rp__button--sign-in {
+  background-color: @running_plan--currnet;
+}
+
+.rp__button--sign-out {
+  background-color: @running_plan--future;
+}
+
+.runners {
+  .h2 {
+    font-size: 30px;
+    margin: 0;
+    text-align: center;
+
+    margin-bottom: 65px;
+  }
+}
+
+.rp-box--runner {
+  margin-bottom: 35px;
+  cursor: pointer;
+}
+
+
+
 /*running plan end*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*neskor vymazat bullshit*/
-
-#gmap {
-  margin-left: auto;
-  margin-right: auto;
-  height: 500px;
-  width:80%;
-}
-#info #text {
-  height: 7%;
-  background-color: seashell;
-  color: forestgreen;
-  font-family: "Courier 10 Pitch", monospace;
-  font-size: 20px;
-  padding: 0.5em;
-  width:60%;
-  margin-left: 10%;
-}
-#floating-panel {
-  /*position: absolute;
-  top: 10px;
-  left: 25%;*/
-  z-index: 5;
-  background-color: #fff;
-  padding: 5px;
-  border: 1px solid #999;
-  text-align: center;
-  font-family: 'Roboto','sans-serif';
-  line-height: 30px;
-  padding-left: 10px;
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-}
-#address {
-  width: 400px;
-  height: 20px;
-}
-#slider {
-  float: right;
-  margin-right: 10%;
-  width: 300px;
-  /*margin: 25px 15px;*/
-}
-#mapText{
-  margin-left: 10%;
-}
-
-/*bullshit*/

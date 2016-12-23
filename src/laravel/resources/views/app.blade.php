@@ -72,7 +72,6 @@
 								<li><a href="{{ url('diary') }}">Zápisnik</a></li>
 							@endif
 
-						<li><a href="{{ url('zapisnik') }}">Bežecký denník</a></li>
 						@endif
 				</ul>
 
@@ -85,7 +84,7 @@
 
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="position: relative; padding-left: 50px;">
-								<img src="uploads/avatars/{{Auth::user()->avatar}}" style="width: 32px;height: 32px;border-radius:50%; position: absolute; top:10px;left: 10px;">
+								<img src="/uploads/avatars/{{Auth::user()->avatar}}" style="width: 32px;height: 32px;border-radius:50%; position: absolute; top:10px;left: 10px;">
 								{{ Auth::user()->name }} <span class="caret"></span>
 							</a>
 
@@ -106,8 +105,6 @@
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 	@yield('content')
-
-	@yield('map')
 </body>
 <footer>
 	<p>TEAM FSPH, FMFI UK &copy;2016<br> TIS projekt </p>

@@ -43,13 +43,13 @@
 
                                                 <div class="div--vertical-space col-xs-12"></div>
 
-                                                {!! Form::label('start', 'Začiatok plánu: ', ["class" => "col-xs-12 col-sm-3"]) !!}
+                                                {!! Form::label('start', 'Začiatok&nbsp;plánu: ', ["class" => "col-xs-12 col-sm-3"]) !!}
                                                 {!! Form::text('start', date("d. m. Y", strtotime($runningPlan->start)), [
                                                     "class" => "col-xs-12 col-sm-9",
                                                     "disabled" => "disabled"
                                                 ]) !!}
 
-                                                {!! Form::label('end', 'Koniec plánu: ', ["class" => "col-xs-12 col-sm-3"]) !!}
+                                                {!! Form::label('end', 'Koniec&nbsp;plánu: ', ["class" => "col-xs-12 col-sm-3"]) !!}
                                                 {!! Form::text('end', date("d. m. Y", strtotime($runningPlan->end)), [
                                                     "class" => "col-xs-12 col-sm-9",
                                                     "disabled" => "disabled"
@@ -97,6 +97,20 @@
 
                         </div>
 
+                        <div class="col-xs-12 runners">
+                            <h2 class="h2">Prihlásení bežci</h2>
+
+                            @forelse($runners as $runner)
+                                @include('running_plans.runner_info_box')
+                            @empty
+                                <div class="row rp-box">
+                                    <div class="col-xs-12">
+                                        Zatiaľ sa neprihlásil žiaden bežec.
+                                    </div>
+                                </div>
+                            @endforelse
+                        </div>
+
                         @if(Auth::user()->is_trainer)
                             <div class="col-xs-12">
                                 {!!  Form::open(['route' => ['running_plan.destroy', $runningPlan->id], 'method' => 'delete','class' => 'form--label-bold']) !!}
@@ -117,7 +131,47 @@
                                 {!!  Form::close() !!}
 
                             </div>
+                        @elseif($theme_background != "theme_old")
+                            <div class="col-xs-12">
+                                @if($theme_background == "theme_future")
+
+                                    {!!  Form::open(['url' => 'user_running_plan', 'method' => 'post','class' => 'form--label-bold']) !!}
+
+                                @elseif($theme_background == "theme_current")
+
+                                    {!!  Form::open(['route' => ['user_running_plan.destroy', $runningPlan->id], 'method' => 'delete','class' => 'form--label-bold']) !!}
+
+                                @endif
+
+
+
+                                <div class="row">
+
+                                    {!! Form::hidden('running_plan_id', $runningPlan->id) !!}
+
+                                    @if($theme_background == "theme_future")
+
+                                        {!!  Form::submit('Prihlásiť sa na plán', [
+                                            "class" => "col-xs-12 rp__button--sign-in"
+                                        ]) !!}
+
+                                    @elseif($theme_background == "theme_current")
+
+                                        {!!  Form::submit('Odhlásiť sa z plánu', [
+                                            "class" => "col-xs-12 rp__button--sign-out"
+                                        ]) !!}
+
+                                    @endif
+
+
+
+                                </div>
+
+                                {!!  Form::close() !!}
+
+                            </div>
                         @endif
+
                     </div>
                 </div>
             </div>

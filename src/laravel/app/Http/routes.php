@@ -14,7 +14,6 @@
 //Route::get('/', 'WelcomeController@index');
 
 Route::get('/', 'PostController@index');
-Route::get('zapisnik','ZapisnikController@index');
 
 Route::get('profil','ProfilController@index');
 Route::post('profil','ProfilController@update_avatar');
@@ -65,3 +64,7 @@ Route::resource('running_plan', 'RunningPlanController');
 
 Route::get('diary','DiaryController@index');
 Route::post('diary','DiaryController@create');
+
+Route::resource('user_running_plan', 'UserRunningPlanController', ['only' => [
+    'store', 'destroy'
+]]);
