@@ -47,22 +47,40 @@ class DiaryController extends Controller {
 								->join('running_plans', 'user_running_plans.running_plan_id', '=', 'running_plans.id')	
 								->select('running_plans.id')	
 								->where('running_plans.end', '>', $mytime)
+								// ->where('running_plans.distance_value', '<', 'user_running_plans.total_distance')
 								->where('user_id', $userID)
-								->lists('running_plans.id');
-		var_dump($userRunPlans);
+								->get();
 		if (empty($userRunPlans)){
 			return view('diary')->withErrors('Nemáš žiadne aktívne bežecké plány');
 		}
-		DB::table('user_running_plans')->where('user_id', $userID)->increment('total_distance', $distance);
 		foreach ($userRunPlans as $urp) {
-			RunningData::create([
-			'user_id' => $userID,
-			'user_running_plan_id' => $urp,
-			'date' => $date,
-			'mood' => $mood,
-			'distance' => $distance,
-			]);
+			$tot_dis = DB::table('user_running_plans')->where('user_id', $userID)->where('running_plan_id', $urp->id)->lists('total_distance');
+			$dis_val = DB::table('running_plans')->where('id', $urp->id)->lists('distance_value');
+			var_dump($tot_dis);
+			var_dump($dis_val);
+			if ($tot_dis < $dis_val){
+				DB::table('user_running_plans')->where('user_id', $userID)->where('running_plan_id', $urp->id)->increment('total_distance', $distance);
+
+				$tot_dis = DB::table('user_running_plans')->where('user_id', $userID)->where('running_plan_id', $urp->id)->lists('total_distance');
+				$dis_val = DB::table('running_plans')->where('id', $urp->id)->lists('distance_value');
+				if ($tot_dis > $dis_val){
+					DB::table('user_running_plans')
+							->where('user_id', $userID)
+							->where('running_plan_id', $urp->id)
+	           				->update(['finish' => $mytime]);
+				}
+
+				RunningData::create([
+				'user_id' => $userID,
+				'user_running_plan_id' => $urp->id,
+				'date' => $date,
+				'mood' => $mood,
+				'distance' => $distance,
+				]);
+				}
+			
 		}
 		return redirect('running_plan')->with('status', 'Záznam z behu pridaný!');
 	}
+}
 }
