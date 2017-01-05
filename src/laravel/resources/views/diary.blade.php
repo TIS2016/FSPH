@@ -8,6 +8,9 @@
     <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
+		@if(Auth::user()->is_trainer)
+               <h2>Zrejme ste zablúdili!</h2>
+             @else
 			<h1>Zápisník výsledkov behania</h1>
     		<p>Formulár pre zápis výsledkov behania do bežeckých plánov</p>
 			<div class="panel panel-default">
@@ -38,6 +41,7 @@
 					
 				</div>
 			</div>
+		@endif
 		</div>
 	</div>
 </div>
