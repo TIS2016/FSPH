@@ -11,14 +11,11 @@ use Illuminate\Foundation\Bus\DispatchesCommands;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Support\Facades\Input;
-
 class DiaryController extends Controller {
-
 	public function __construct()
 	{
 		$this->middleware('auth');
 	}
-
 	/**
 	 * Show the application dashboard to the user.
 	 *
@@ -27,30 +24,65 @@ class DiaryController extends Controller {
 	public function index()
 	{
 		return view('diary');
-
 	}
-
+	/**
+	 * Upload data to DB and redirect to running_plan
+	 *
+	 * @return running_plan
+	 */
 	public function create(){
 		$userID = Auth::user()->id;
-		(float)$distance = Input::get('distance');
+		$distance = Input::get('distance');
 		$date = Input::get('date');
-		(int)$mood = Input::get('mood');
-		$userRunningPlanID = 2;
-
-		$userRunPlans = UserRunningPlan::where('user_id', $userID)->orderBy('running_plan_id')->lists('running_plan_id');
-		foreach ($userRunPlans as $urp) {
-			RunningData::create([
-			'user_id' => $userID,
-			'user_running_plan_id' => $urp,
-			'date' => $date,
-			'mood' => $mood,
-			'distance' => $distance,
-			]);
+		$mood = Input::get('mood');
+		if (!($distance > 0)){
+			return view('diary')->withErrors('Zle zadaná vzdialenosť');
+		}
+		$mytime = \Carbon\Carbon::now();
+		if ($date > $mytime){
+			return view('diary')->withErrors('Nesprávne zadaný dátum');
+		}
+		$userRunPlans =  DB::table('user_running_plans')
+								->join('running_plans', 'user_running_plans.running_plan_id', '=', 'running_plans.id')	
+								->select('running_plans.id')	
+								->where('running_plans.end', '>', $mytime)
+								// ->where('running_plans.distance_value', '<', 'user_running_plans.total_distance')
+								->where('user_id', $userID)
+								->get();
+		if (empty($userRunPlans)){
+			return view('diary')->withErrors('Nemáš žiadne aktívne bežecké plány');
 		}
 
-		
-		return view('diary');
+		$check = false;
+
+		foreach ($userRunPlans as $urp) {
+			$tot_dis = DB::table('user_running_plans')->where('user_id', $userID)->where('running_plan_id', $urp->id)->lists('total_distance');
+			$dis_val = DB::table('running_plans')->where('id', $urp->id)->lists('distance_value');
+			if ($tot_dis < $dis_val){
+			    $check = true;
+
+				DB::table('user_running_plans')->where('user_id', $userID)->where('running_plan_id', $urp->id)->increment('total_distance', $distance);
+
+				$tot_dis = DB::table('user_running_plans')->where('user_id', $userID)->where('running_plan_id', $urp->id)->lists('total_distance');
+				$dis_val = DB::table('running_plans')->where('id', $urp->id)->lists('distance_value');
+				if ($tot_dis > $dis_val){
+					DB::table('user_running_plans')
+							->where('user_id', $userID)
+							->where('running_plan_id', $urp->id)
+	           				->update(['finish' => $mytime]);
+				}
+
+				RunningData::create([
+				'user_id' => $userID,
+				'user_running_plan_id' => $urp->id,
+				'date' => $date,
+				'mood' => $mood,
+				'distance' => $distance,
+				]);
+				}
+			
+		}
+
+        return redirect('running_plan')->with('status', $check ? 'Záznam z behu pridaný!' : 'Už ste asi všetky plány naplnili, prihláste sa na nejaký ďalší.');
 	}
-
 }
-
