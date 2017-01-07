@@ -32,10 +32,9 @@ class DiaryController extends Controller {
 	 */
 	public function create(){
 		$userID = Auth::user()->id;
-		(float)$distance = Input::get('distance');
+		$distance = Input::get('distance');
 		$date = Input::get('date');
-		(int)$mood = Input::get('mood');
-		$userRunningPlanID = 2;
+		$mood = Input::get('mood');
 		if (!($distance > 0)){
 			return view('diary')->withErrors('Zle zadaná vzdialenosť');
 		}
@@ -53,12 +52,15 @@ class DiaryController extends Controller {
 		if (empty($userRunPlans)){
 			return view('diary')->withErrors('Nemáš žiadne aktívne bežecké plány');
 		}
+
+		$check = false;
+
 		foreach ($userRunPlans as $urp) {
 			$tot_dis = DB::table('user_running_plans')->where('user_id', $userID)->where('running_plan_id', $urp->id)->lists('total_distance');
 			$dis_val = DB::table('running_plans')->where('id', $urp->id)->lists('distance_value');
-			var_dump($tot_dis);
-			var_dump($dis_val);
 			if ($tot_dis < $dis_val){
+			    $check = true;
+
 				DB::table('user_running_plans')->where('user_id', $userID)->where('running_plan_id', $urp->id)->increment('total_distance', $distance);
 
 				$tot_dis = DB::table('user_running_plans')->where('user_id', $userID)->where('running_plan_id', $urp->id)->lists('total_distance');
@@ -80,7 +82,7 @@ class DiaryController extends Controller {
 				}
 			
 		}
-		return redirect('running_plan')->with('status', 'Záznam z behu pridaný!');
+
+        return redirect('running_plan')->with('status', $check ? 'Záznam z behu pridaný!' : 'Už ste asi všetky plány naplnili, prihláste sa na nejaký ďalší.');
 	}
-}
 }
