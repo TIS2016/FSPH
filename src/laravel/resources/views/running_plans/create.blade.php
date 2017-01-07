@@ -51,14 +51,14 @@
 
                                 {!! Form::label('start', 'Začiatok plánu: ', ["class" => "col-xs-12 col-sm-3"]) !!}
                                 {!! Form::text('start', null, [
-                                    'placeholder' => 'Časový začiatok plánu',
+                                    'placeholder' => 'časový začiatok plánu',
                                     "class" => "col-xs-12 col-sm-9",
                                     "required" => "true"
                                 ]) !!}
 
                                 {!! Form::label('end', 'Koniec plánu: ', ["class" => "col-xs-12 col-sm-3"]) !!}
                                 {!! Form::text('end', null, [
-                                    'placeholder' => 'Časový koniec plánu',
+                                    'placeholder' => 'časový koniec plánu',
                                     "class" => "col-xs-12 col-sm-9",
                                     "required" => "true"
                                 ]) !!}
@@ -67,13 +67,13 @@
 
                                 {!! Form::label('origin', 'Štart:', ["class" => "col-xs-12 col-sm-3"]) !!}
                                 {!! Form::text('origin', null, [
-                                    'placeholder' => 'Štart bežeckého plánu',
+                                    'placeholder' => 'štart bežeckého plánu',
                                     "class" => "col-xs-12 col-sm-9"
                                 ]) !!}
 
                                 {!! Form::label('destination', 'Cieľ:', ["class" => "col-xs-12 col-sm-3"]) !!}
                                 {!! Form::text('destination', null, [
-                                    'placeholder' => 'Cieľ bežeckého plánu',
+                                    'placeholder' => 'cieľ bežeckého plánu',
                                     "class" => "col-xs-12 col-sm-9"
                                 ]) !!}
 

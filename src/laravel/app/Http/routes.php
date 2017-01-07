@@ -11,7 +11,6 @@
 |
 */
 
-//Route::get('/', 'WelcomeController@index');
 
 Route::get('/', 'PostController@index');
 

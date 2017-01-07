@@ -42,40 +42,40 @@
 					<!--<li><a href="{{ url('/') }}">Home</a></li> -->
 						@if (Auth::check() and Auth::user()->is_active != '0')
 							@if(Auth::user()->is_trainer)
-								<li class="dropdown"><a href="{{ url('#') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="position: relative;">Groups  <span class="caret"></span></a>
+								<li class="dropdown"><a href="{{ url('#') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="position: relative;">Skupiny  <span class="caret"></span></a>
 									<ul class="dropdown-menu" role="menu">
-										<li><a href="{{ url('createGroup') }}">create Group</a></li>
-										<li><a href="{{ url('editGroup') }}">edit Group</a></li>
-										<li><a href="{{ url('deleteGroup') }}">delete Group</a></li>
+										<li><a href="{{ url('createGroup') }}">vytvoriť Skupinu</a></li>
+										<li><a href="{{ url('editGroup') }}">upraviť Skupinu</a></li>
+										<li><a href="{{ url('deleteGroup') }}">vymazať Skupinu</a></li>
 									</ul>
 								</li>
 
-								<li class="dropdown"><a href="{{ url('#') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="position: relative;">Running plans<span class="caret"></span></a>
+								<li class="dropdown"><a href="{{ url('#') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="position: relative;">Bežecké plány  <span class="caret"></span></a>
 									<ul class="dropdown-menu" role="menu">
-										<li><a href="{{ route('running_plan.create') }}">create new Running plan</a></li>
-										<li><a href="{{ route('running_plan.index') }}">list my Running plans</a></li>
+										<li><a href="{{ route('running_plan.create') }}">vytvoriť nový Bežecký plán</a></li>
+										<li><a href="{{ route('running_plan.index') }}">moje Bežecké plány</a></li>
 									</ul>
 								</li>
 
 							@elseif(Auth::user()->is_admin)
-								<li class="dropdown"><a href="{{ url('#') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="position: relative;">Trainers  <span class="caret"></span></a>
+								<li class="dropdown"><a href="{{ url('#') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="position: relative;">Tréneri  <span class="caret"></span></a>
 									<ul class="dropdown-menu" role="menu">
-										<li><a href="{{ url('addtrainers') }}">add Trainers</a></li>
-										<li><a href="{{ url('/rmtrainers') }}">remove Trainers</a></li>
+										<li><a href="{{ url('addtrainers') }}">pridať Trénera</a></li>
+										<li><a href="{{ url('/rmtrainers') }}">zrušiť Trénera</a></li>
 									</ul>
 								</li>
 
-								<li class="dropdown"><a href="{{ url('#') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="position: relative;">Users  <span class="caret"></span></a>
+								<li class="dropdown"><a href="{{ url('#') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="position: relative;">Používatelia  <span class="caret"></span></a>
 									<ul class="dropdown-menu" role="menu">
-										<li><a href="{{ url('activate') }}">Activate User</a></li>
-										<li><a href="{{ url('deleteUser') }}">Delete User</a></li>
+										<li><a href="{{ url('activate') }}">aktivovať používateľa</a></li>
+										<li><a href="{{ url('deleteUser') }}">vymazať používateľa</a></li>
 									</ul>
 								</li>
 
 							@else
-								<li class="dropdown"><a href="{{ url('#') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="position: relative;">Running plans<span class="caret"></span></a>
+								<li class="dropdown"><a href="{{ url('#') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="position: relative;">Bežecké plány  <span class="caret"></span></a>
 									<ul class="dropdown-menu" role="menu">
-										<li><a href="{{ route('running_plan.index') }}">list my Running plans</a></li>
+										<li><a href="{{ route('running_plan.index') }}">Moje bežecké plány</a></li>
 									</ul>
 								</li>
 
@@ -87,8 +87,8 @@
 
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest() or  Auth::user()->is_active == '0')
-						<li><a href="{{ url('/auth/login') }}">Login</a></li>
-						<li><a href="{{ url('/auth/register') }}">Register</a></li>
+						<li><a href="{{ url('/auth/login') }}">Prihlásiť</a></li>
+						<li><a href="{{ url('/auth/register') }}">Regitrovať</a></li>
 
 					@elseif (Auth::check() and Auth::user()->is_active !='0')
 
@@ -100,7 +100,7 @@
 
 							<ul class="dropdown-menu" role="menu">
 								<li><a href="{{ url('profil') }}">Profil</a></li>
-								<li><a href="{{ url('/auth/logout') }}">Logout</a></li>
+								<li><a href="{{ url('/auth/logout') }}">Odhlásiť</a></li>
 							</ul>
 						</li>
 					@endif

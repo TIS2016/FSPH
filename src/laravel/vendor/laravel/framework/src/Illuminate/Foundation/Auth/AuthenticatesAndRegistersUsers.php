@@ -102,7 +102,7 @@ trait AuthenticatesAndRegistersUsers {
         if ($user2 != null) {
             //print("tESTUJEM USERA V LOGIN: ".$user2);
             if ($user2->is_active == 0) {
-                print("Your account isn`t activated!");
+                //print("Your account isn`t activated!");
                 //return redirect()->intended('home');
                 return view('notActive');
             }

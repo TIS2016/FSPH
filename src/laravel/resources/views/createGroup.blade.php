@@ -19,29 +19,40 @@
 						</div>
 					@endif
 						<?php $all = 0; ?>
-						{!!  Form::open() !!}
-						{!! Form::label('groupNameLabel', 'Meno skupiny: ',array('style' => 'font-weight:bold;')) !!}
-						{!! Form::text('groupName') !!}<br><br>
-						<p style="text-decoration: underline;"><strong>Bezci bez skupiny:</strong> </p>
+						{!!  Form::open(['class' => 'form--label-bold']) !!}
+
+						{!! Form::label('groupName', 'Skupina: ', ["class" => "col-xs-12 col-sm-3"]) !!}
+						{!! Form::text('groupName', null, [
+                                    'placeholder' => 'meno skupiny',
+                                    "class" => "col-xs-12 col-sm-9",
+                                    "required" => "true"
+						]) !!}
+
+						<p class="col-xs-12" style="text-decoration: underline; margin-top: 25px; margin-bottom: 25px;"><strong>Bežci bez skupiny:</strong> </p>
 						@forelse($names->all() as $name)
 							@if ($name->group_id == 0 and $name->is_trainer == 0 and $name->is_admin != true and $name->is_active == 1)
 								<?php $all += 1; ?>
-								{!! Form::label('name', 'Meno: '.$name->name) !!}
-								{!!  Form::label('email', ' | E-mail: '.$name->email).' | ' !!}
-								{!!  Form::label('checklabel', ' choose in your Group: ',array('style' => 'font-weight:bold;')) !!}
-								{!! Form::checkbox('agree[]', $name->id) !!}
+
+								<div class="col-xs-12 col-sm-4 form__div--user">
+									<label class="form__label--cursor">
+										<span class='form__label--normal'>Meno: </span> {{ $name->name }} <br />
+										<span class='form__label--normal'>E-Mail: </span> {{ $name->email }} <br />
+										<span class='form__label--normal form__label--italic'>pridať do novej Skupiny:</span>
+										{!! Form::checkbox('agree[]', $name->id) !!}
+									</label>
+								</div>
 							@endif
-							<br>
 						@empty
-							<p>We got nothing, database (table user) is empty!</p>
+							<p>V databáze nie sú evidovaní žiadni používatelia!</p>
 						@endforelse
-						<br>
-						{!!  Form::submit('Create', array('class' => 'pull-left btn btn-sm btn-primary')) !!}
+
+						{!!  Form::submit('Vytvoriť', array('class' => 'pull-left btn btn-sm btn-primary col-xs-12')) !!}
+
 						{!!  Form::close() !!}
 				</div>
 			</div>
 			@if($all == 0)
-				<p><strong>Ziadny pouzivatelia na vyber do skupiny!</strong></p>
+				<p><strong>Žiadny používatelia na výber do skupiny!</strong></p>
 			@endif
 		</div>
 	</div>

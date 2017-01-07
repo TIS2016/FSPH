@@ -5,22 +5,27 @@
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-default">
-				<div class="panel-heading">Pouzivatelia na schvalenie za Trenera</div>
+				<div class="panel-heading">Používatelia na schválenie za Trénera</div>
 
 				<div class="panel-body" >
-					{!!  Form::open() !!}
+					{!!  Form::open(['class' => 'form--label-bold']) !!}
 					@forelse($names->all() as $name)
 							@if (($name->is_admin == '0'or $name->is_admin == false) and ($name->is_trainer=='0' or $name->is_trainer == false ))
-								{!! Form::label('name', 'Meno: '.$name->name) !!}
-								{!!  Form::label('email', ' | E-mail: '.$name->email).' | ' !!}
-								{!!  Form::label('checklabel', ' set as trainer: ',array('style' => 'font-weight:bold;')) !!}
-								{!!  Form::radio('agree',$name->email) !!}
+
+							<div class="col-xs-12 col-sm-4 form__div--user">
+								<label class="form__label--cursor">
+									<span class='form__label--normal'>Meno: </span> {{ $name->name }} <br />
+									<span class='form__label--normal'>E-Mail: </span> {{ $name->email }} <br />
+									<span class='form__label--normal form__label--italic'>nastaviť ako trénera:</span>
+									{!!  Form::radio('agree', $name->email) !!}
+								</label>
+							</div>
+
 							@endif
-						<br>
 					@empty
-						<p>We got nothing, database (table user) is empty!</p>
+						<p>V databáze nie sú evidovaní žiadni používatelia!</p>
 					@endforelse
-					{!!  Form::submit('Save', array('class' => 'pull-left btn btn-sm btn-primary')) !!}
+					{!!  Form::submit('Nastaviť', array('class' => 'pull-left btn btn-sm btn-primary col-xs-12')) !!}
 					{!!  Form::close() !!}
 				</div>
 			</div>

@@ -9,26 +9,32 @@
 
 				<div class="panel-body" >
 					<?php $users = 0; ?>
-					{!!  Form::open() !!}
+					{!!  Form::open(['class' => 'form--label-bold']) !!}
+
 					@forelse($names->all() as $name)
 
 								<?php $users += 1; ?>
-								{!! Form::label('name', 'Meno: '.$name->name) !!}
-								{!!  Form::label('checklabel', ' delete Group: ',array('style' => 'font-weight:bold;')) !!}
-								{!!  Form::radio('agree',$name->id) !!}
 
-						<br>
+									<div class="col-xs-12 col-sm-4 form__div--user">
+										<label class="form__label--cursor">
+											<span class='form__label--normal'>Skupina: </span> {{ $name->name }} <br />
+											<span class='form__label--normal form__label--italic'>vymazať skupinu:</span>
+											{!!  Form::radio('agree', $name->id) !!}
+										</label>
+									</div>
+
 					@empty
-						<p>We got nothing, database (table user) is empty!</p>
+						<p>V databáze nie sú evidované žiadne skupiny!</p>
 					@endforelse
-					{!!  Form::submit('Delete', array('class' => 'pull-left btn btn-sm btn-primary', 'style' => 'background-color:red; border-color:red;')) !!}
+					{!!  Form::submit('Vymazať', array('class' => 'pull-left btn btn-sm btn-primary col-xs-12', 'style' => 'background-color:red; border-color:red;')) !!}
+
 					{!!  Form::close() !!}
 
 
 				</div>
 			</div>
 			@if($users == 0)
-				<p><strong>Vsetky skupiny su vymazane!</strong></p>
+				<p><strong>Všetky skupiny sú vymazané!</strong></p>
 			@endif
 		</div>
 	</div>

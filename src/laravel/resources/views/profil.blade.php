@@ -24,17 +24,17 @@
 								<br>
 							@endif
 						@empty
-							<p>We got nothing, database (table user) is empty!</p>
+							<p>V databáze nie sú evidovaní žiadni používatelia!</p>
 
 						@endforelse
 					@endif
 
 						<form enctype="multipart/form-data" action="profil" method="POST" style="float: left;">
-							<label style="color: purple;">Zmenit obrazok profilu</label>
-							<input type="file" name="avatar">
+							<label for="image_file" style="color: purple;">Zmeniť obrázok profilu</label>
+							<input id="image_file" type="file" name="avatar">
 							<input type="hidden" name="_token" value="{{csrf_token()}}">
 							<br>
-							<input type="submit" class="pull-left btn btn-sm btn-primary">
+							<input value="Uložiť" type="submit" class="pull-left btn btn-sm btn-primary col-xs-12">
 						</form>
 
 				</div>
