@@ -8,8 +8,8 @@
 				<div class="panel-heading">Home</div>
 
 				<div class="panel-body">
-					Your account didnt been activated by trainer!<br><br>
-					<strong>Please wait and try it later.</strong><br><br>
+					Vaše konto ešte zatiaľ nebolo aktivované!<br><br>
+					<strong>Prosím počkajte a skúste sa prihlásiť neskôr.</strong><br><br>
 
 					<p>RunDiary Team.</p>
 				</div>

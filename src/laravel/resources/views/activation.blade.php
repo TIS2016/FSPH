@@ -1,8 +1,8 @@
 <html>
 <body>
-<h2>Thank you for registration!</h2>
+<h2>Ďakujeme za registráciu!</h2>
 <p>
-	Your accout is waiting for trainer acivation.
+	Vaše konto čaká na aktiváciu administrátorom.
 
 	FSPH Team.
 </p>

@@ -107,14 +107,14 @@ class GroupController extends Controller {
 
         $action = Input::get('action', 'none');
         //print($action);
-        if($action=='Edit'){
+        if($action=='Upraviť'){
             $groupName = Input::get('group');
             $grp = Group::where('id', $groupName)->first();
             $names = User::all();
 
             return view("editSelectedGroup", compact('grp', 'names'));
 
-        }else if($action=='Save'){
+        }else if($action=='Uložiť'){
             //do save
             //print("it works");
             $usersToAdd = collect(Input::get('agreeAdd'));

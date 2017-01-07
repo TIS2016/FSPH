@@ -41,6 +41,27 @@
   }
 }
 
+.form__label--normal {
+  font-weight: normal;
+}
+
+.form__label--italic {
+  font-style: italic;
+}
+
+.form__label--cursor {
+  cursor: pointer;
+
+  input[type="radio"],
+  input[type="checkbox"] {
+    margin-left: 10px;
+  }
+}
+
+.form__div--user {
+  margin-bottom: 25px;
+}
+
 .citat{
   font-style: italic;
   font-size: large;
@@ -253,6 +274,19 @@
     margin: 0;
     text-align: center;
   }
+}
+
+.h1--diary {
+  margin: 50px 0;
+  text-align: center;
+}
+
+.label-group--delete {
+  color: fade(@running_plan--old, 95%);
+}
+
+.label-group--add {
+  color: fade(@running_plan--future, 95%);
 }
 
 .rp__h2--date-error {
