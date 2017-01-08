@@ -17,7 +17,7 @@
 					@forelse($names->all() as $name)
 							@if($name->id == $userID)
 								<section style="margin-left: 5%">
-									<img src="/uploads/avatars/{{$name->avatar}}" style="width: 150px;height: 150px;border-radius:50%; float: left;margin-right: 25px;">
+									<img src="uploads/avatars/{{$name->avatar}}" style="width: 150px;height: 150px;border-radius:50%; float: left;margin-right: 25px;">
 									<p>Meno: {{$name->name}}</p>
 									<p>E-mail: {{$name->email}}</p>
 								</section>
