@@ -33,22 +33,23 @@ class DiaryController extends Controller {
 	public function create(){
 		$userID = Auth::user()->id;
 		$distance = Input::get('distance');
-		$date = Input::get('date');
+		$date = date("Y-m-d H:i:s", strtotime( Input::get('date') ));
 		$mood = Input::get('mood');
 		if (!($distance > 0)){
 			return view('diary')->withErrors('Zle zadaná vzdialenosť');
 		}
-		$mytime = \Carbon\Carbon::now();
+		$mytime = date("Y-m-d H:i:s", strtotime( \Carbon\Carbon::now() ));
 		if ($date > $mytime){
 			return view('diary')->withErrors('Nesprávne zadaný dátum');
 		}
-		$userRunPlans =  DB::table('user_running_plans')
+		$userRunPlans = DB::table('user_running_plans')
 								->join('running_plans', 'user_running_plans.running_plan_id', '=', 'running_plans.id')	
-								->select('running_plans.id')	
 								->where('running_plans.end', '>', $mytime)
-								// ->where('running_plans.distance_value', '<', 'user_running_plans.total_distance')
 								->where('user_id', $userID)
-								->get();
+								->get([
+								    'user_running_plans.*',
+                                    'running_plans.id AS running_plans___id',
+                                ]);
 		if (empty($userRunPlans)){
 			return view('diary')->withErrors('Nemáš žiadne aktívne bežecké plány');
 		}
@@ -56,19 +57,19 @@ class DiaryController extends Controller {
 		$check = false;
 
 		foreach ($userRunPlans as $urp) {
-			$tot_dis = DB::table('user_running_plans')->where('user_id', $userID)->where('running_plan_id', $urp->id)->lists('total_distance');
-			$dis_val = DB::table('running_plans')->where('id', $urp->id)->lists('distance_value');
+			$tot_dis = DB::table('user_running_plans')->where('user_id', $userID)->where('running_plan_id', $urp->running_plans___id)->lists('total_distance');
+			$dis_val = DB::table('running_plans')->where('id', $urp->running_plans___id)->lists('distance_value');
 			if ($tot_dis < $dis_val){
 			    $check = true;
 
-				DB::table('user_running_plans')->where('user_id', $userID)->where('running_plan_id', $urp->id)->increment('total_distance', $distance);
+				DB::table('user_running_plans')->where('user_id', $userID)->where('running_plan_id', $urp->running_plans___id)->increment('total_distance', $distance);
 
-				$tot_dis = DB::table('user_running_plans')->where('user_id', $userID)->where('running_plan_id', $urp->id)->lists('total_distance');
-				$dis_val = DB::table('running_plans')->where('id', $urp->id)->lists('distance_value');
+				$tot_dis = DB::table('user_running_plans')->where('user_id', $userID)->where('running_plan_id', $urp->running_plans___id)->lists('total_distance');
+				$dis_val = DB::table('running_plans')->where('id', $urp->running_plans___id)->lists('distance_value');
 				if ($tot_dis > $dis_val){
 					DB::table('user_running_plans')
 							->where('user_id', $userID)
-							->where('running_plan_id', $urp->id)
+							->where('running_plan_id', $urp->running_plans___id)
 	           				->update(['finish' => $mytime]);
 				}
 
@@ -79,7 +80,7 @@ class DiaryController extends Controller {
 				'mood' => $mood,
 				'distance' => $distance,
 				]);
-				}
+            }
 			
 		}
 

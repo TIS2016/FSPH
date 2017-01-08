@@ -4,6 +4,7 @@ use App\Group;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\RunningData;
 use App\RunningPlan;
 use App\UserRunningPlan;
 use Illuminate\Http\Request;
@@ -255,10 +256,20 @@ class RunningPlanController extends Controller {
                 DB::raw('user_running_plans.total_distance >= running_plans.distance_value AS runner___is_winner'),
             ]);
 
+        $running_datas = [];
+        foreach ($runners as $runner) {
+            $running_datas[$runner->user_id] = RunningData::where('user_id', $runner->user_id)
+                ->where('user_running_plan_id', $runner->id)
+                ->orderBy('date', 'desc')
+                ->orderBy('created_at', 'desc')
+                ->get();
+        }
+
         return view('running_plans.show')
             ->with('title', 'Môj bežecký plán')
             ->with('runningPlan', $runningPlan)
             ->with('runners', $runners)
+            ->with('running_datas', $running_datas)
             ->with('groups', $groups)
             ->with('theme_background', $theme_background)
             ->with('timeAtomaticlalyAdjusted', $timeAtomaticlalyAdjusted);
