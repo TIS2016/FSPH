@@ -142,7 +142,7 @@ $GMAP_API_KEY = "AIzaSyB3rIhgEx90wqPIo7LzAkloA4YK8GxwJHQ";
         @foreach($runners as $runner)
             var runnerMarker_{{ $runner->id }} = new google.maps.Marker({
                 map: map,
-                icon: "/uploads/map_avatars/{{ Auth::user()->avatar }}",
+                icon: "uploads/map_avatars/{{ Auth::user()->avatar }}",
                 title: "{{ $runner->users___name }}",
             });
         @endforeach
