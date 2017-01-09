@@ -253,6 +253,7 @@ class RunningPlanController extends Controller {
             ->get([
                 'user_running_plans.*',
                 'users.name AS users___name',
+                'users.avatar AS users___avatar',
                 DB::raw('user_running_plans.total_distance >= running_plans.distance_value AS runner___is_winner'),
             ]);
 

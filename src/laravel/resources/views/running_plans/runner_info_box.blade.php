@@ -16,7 +16,7 @@
                 A ešte stále beží...
             @endif
         </div>
-        <img src="/uploads/avatars/{{ Auth::user()->avatar }}" alt="avatar" class="runner__description--img" />
+        <img src="/public/uploads/avatars/{{ $runner->users___avatar }}" alt="avatar" class="runner__description--img" />
 
         <div class="runner__description--text col-xs-12 js-table-{{ $runner->id }}">
             <table class="table--running-data hidden-xs">
