@@ -88,7 +88,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest() or  Auth::user()->is_active == '0')
 						<li><a href="{{ url('/auth/login') }}">Prihlásiť</a></li>
-						<li><a href="{{ url('/auth/register') }}">Regitrovať</a></li>
+						<li><a href="{{ url('/auth/register') }}">Registrovať</a></li>
 
 					@elseif (Auth::check() and Auth::user()->is_active !='0')
 
