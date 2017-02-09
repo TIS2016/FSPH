@@ -13,6 +13,7 @@
              @else
 			<h1 class="h1--diary">Zápisník výsledkov behania</h1>
 			<div class="panel panel-default">
+
 				<div class="panel-heading">Formulár pre zápis výsledkov behania do bežeckých plánov</div>
 				<div class="panel-body">
 					@if (count($errors) > 0)
@@ -57,7 +58,52 @@
 						{!!  Form::close() !!}
 					
 				</div>
+
+				<div class="panel-body">
+					<div class="runner__description--text col-xs-12">
+						<table class="table--running-data hidden-xs">
+							<tr>
+								<th>Dátum záznamu</th>
+								<th>Odbehnutá vzdialenosť (m)</th>
+								<th>:&nbsp;)</th>
+							</tr>
+
+							@foreach($running_datas as $running_data)
+								<tr>
+									<td>{{ date("d. m. Y", strtotime($running_data->date)) }}</td>
+									<td>{{ $running_data->distance }}</td>
+									<td class="td--running-data-mood-{{ $running_data->mood }}">
+										@if($running_data->mood == 1)
+											:&nbsp;)
+										@elseif($running_data->mood == 2)
+											:&nbsp;]
+										@elseif($running_data->mood == 3)
+											:&nbsp;|
+										@elseif($running_data->mood == 4)
+											:&nbsp;(
+										@endif
+									</td>
+								</tr>
+							@endforeach
+						</table>
+
+						<table class="table--running-data visible-xs">
+							<tr>
+								<th colspan="2">Záznamy</th>
+							</tr>
+
+							@foreach($running_datas as $running_data)
+								<tr class="td--running-data-mood-{{ $running_data->mood }}">
+									<td>{{ date("d. m. Y", strtotime($running_data->date)) }}</td>
+									<td>{{ $running_data->distance }}m</td>
+								</tr>
+							@endforeach
+						</table>
+					</div>
+				</div>
+
 			</div>
+
 		@endif
 		</div>
 	</div>

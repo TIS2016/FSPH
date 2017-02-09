@@ -47,7 +47,7 @@
 
             <table class="table--running-data visible-xs">
                 <tr>
-                    <th colspan="2">Záznam</th>
+                    <th colspan="2">Záznamy</th>
                 </tr>
 
                 @foreach($running_datas[$runner->user_id] as $running_data)

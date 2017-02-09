@@ -23,7 +23,16 @@ class DiaryController extends Controller {
 	 */
 	public function index()
 	{
-		return view('diary');
+        $userID = Auth::user()->id;
+
+	    $running_datas = RunningData::distinct()->select('created_at', 'date', 'mood', 'distance')
+            ->where('user_id', $userID)
+            ->orderBy('date', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+		return view('diary')
+            ->with('running_datas', $running_datas);
 	}
 	/**
 	 * Upload data to DB and redirect to running_plan
@@ -84,6 +93,7 @@ class DiaryController extends Controller {
 			
 		}
 
-        return redirect('running_plan')->with('status', $check ? 'Záznam z behu pridaný!' : 'Už ste asi všetky plány naplnili, prihláste sa na nejaký ďalší.');
+        return redirect('running_plan')
+            ->with('status', $check ? 'Záznam z behu pridaný!' : 'Už ste asi všetky plány naplnili, prihláste sa na nejaký ďalší.');
 	}
 }
