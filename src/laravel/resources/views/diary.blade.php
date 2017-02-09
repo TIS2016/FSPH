@@ -85,6 +85,22 @@
 									</td>
 								</tr>
 							@endforeach
+
+							<tr class="table__row--sum">
+								<th>Celkovo:</th>
+								<th>{{ $total_distance / 1000 }} km</th>
+								<th class="td--running-data-mood-{{ $avg_mood }}">
+									@if($avg_mood == 1)
+										:&nbsp;)
+									@elseif($avg_mood == 2)
+										:&nbsp;]
+									@elseif($avg_mood == 3)
+										:&nbsp;|
+									@elseif($avg_mood == 4)
+										:&nbsp;(
+									@endif
+								</th>
+							</tr>
 						</table>
 
 						<table class="table--running-data visible-xs">
@@ -95,9 +111,14 @@
 							@foreach($running_datas as $running_data)
 								<tr class="td--running-data-mood-{{ $running_data->mood }}">
 									<td>{{ date("d. m. Y", strtotime($running_data->date)) }}</td>
-									<td>{{ $running_data->distance }}m</td>
+									<td>{{ $running_data->distance }} m</td>
 								</tr>
 							@endforeach
+
+							<tr class="table__row--sum td--running-data-mood-{{ $avg_mood }}">
+								<th>Celkovo:</th>
+								<th>{{ $total_distance / 1000 }} km</th>
+							</tr>
 						</table>
 					</div>
 				</div>

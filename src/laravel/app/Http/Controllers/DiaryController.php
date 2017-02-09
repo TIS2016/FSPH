@@ -31,8 +31,18 @@ class DiaryController extends Controller {
             ->orderBy('created_at', 'desc')
             ->get();
 
+        $total_distance = RunningData::distinct()->select('created_at', 'date', 'mood', 'distance')
+            ->where('user_id', $userID)
+            ->sum('distance');
+
+        $avg_mood = round(RunningData::distinct()->select('created_at', 'date', 'mood', 'distance')
+            ->where('user_id', $userID)
+            ->avg('mood'));
+
 		return view('diary')
-            ->with('running_datas', $running_datas);
+            ->with('running_datas', $running_datas)
+            ->with('total_distance', $total_distance)
+            ->with('avg_mood', $avg_mood);
 	}
 	/**
 	 * Upload data to DB and redirect to running_plan
