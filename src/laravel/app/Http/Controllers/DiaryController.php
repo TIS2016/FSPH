@@ -31,13 +31,21 @@ class DiaryController extends Controller {
             ->orderBy('created_at', 'desc')
             ->get();
 
-        $total_distance = RunningData::distinct()->select('created_at', 'date', 'mood', 'distance')
+        $total_distance = array_sum(
+            DB::table('running_datas')
             ->where('user_id', $userID)
-            ->sum('distance');
+            ->groupBy('created_at')
+            ->lists(DB::raw("distance"))
+        );
 
-        $avg_mood = round(RunningData::distinct()->select('created_at', 'date', 'mood', 'distance')
+        $avg_mood_aux = DB::table('running_datas')
             ->where('user_id', $userID)
-            ->avg('mood'));
+            ->groupBy('created_at')
+            ->lists(DB::raw("mood"));
+
+        $avg_mood = round(
+            array_sum($avg_mood_aux) / count($avg_mood_aux)
+        );
 
 		return view('diary')
             ->with('running_datas', $running_datas)
